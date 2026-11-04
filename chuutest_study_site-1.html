@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#172554">
+<title>中1 定期テスト対策</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f6fc;color:#172033;font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif}
+button{font:inherit;cursor:pointer}.app{max-width:760px;min-height:100vh;margin:auto;background:#fff;box-shadow:0 0 35px #16213e12}
+header{padding:18px 20px;background:#172554;color:#fff;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:800;letter-spacing:.03em}.pill{font-size:12px;border:1px solid #ffffff55;border-radius:99px;padding:5px 9px}
+main{padding:22px 18px 38px}.screen{display:none}.screen.active{display:block}
+.hero{background:linear-gradient(140deg,#1d4ed8,#4338ca);color:white;border-radius:22px;padding:28px 22px;margin:4px 0 22px}
+.eyebrow{font-size:12px;opacity:.85;font-weight:700;letter-spacing:.08em}.hero h1{font-size:29px;line-height:1.35;margin:10px 0}.hero p{margin:0;color:#e0e7ff;line-height:1.7}
+.primary{display:block;width:100%;border:0;border-radius:14px;background:#fbbf24;color:#29200a;font-weight:900;font-size:19px;padding:17px;margin-top:22px;box-shadow:0 5px 0 #d49b13}
+h2{font-size:21px;margin:8px 0 6px}.muted{color:#64748b;font-size:14px;line-height:1.65;margin:4px 0 18px}
+.subjects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.subject{border:1px solid #e2e8f0;background:#fff;border-radius:16px;padding:16px;text-align:left;min-height:112px;box-shadow:0 3px 10px #0f172a08}
+.subject:last-child{grid-column:1/-1}.emoji{font-size:25px}.subject b{display:block;font-size:17px;margin:6px 0 3px}.subject small{color:#64748b;line-height:1.5}
+.back{border:0;background:#eef2ff;color:#3730a3;border-radius:10px;padding:9px 13px;font-weight:700;margin-bottom:15px}
+.unitlist{display:grid;gap:10px}.unit{border:1px solid #e2e8f0;background:white;border-radius:14px;padding:15px;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.unit b{display:block}.unit small{display:block;color:#64748b;margin-top:4px;line-height:1.5}.arrow{font-size:22px;color:#64748b}
+.panel{background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:17px;margin:14px 0}
+.meta{display:flex;justify-content:space-between;color:#64748b;font-size:13px}.track{height:7px;border-radius:20px;background:#e2e8f0;margin:10px 0 20px;overflow:hidden}.fill{height:100%;width:0;background:#2563eb;transition:.2s}
+.question{font-size:21px;line-height:1.6;font-weight:800;margin:12px 0 18px;white-space:pre-wrap}
+.choices{display:grid;gap:10px}.choice{border:2px solid #e2e8f0;background:#fff;border-radius:13px;padding:14px;text-align:left}.choice.sel{border-color:#2563eb;background:#eff6ff}.choice:disabled{cursor:default}
+.feedback{display:none;padding:14px;border-radius:13px;margin-top:15px;line-height:1.7;background:#f1f5f9}.feedback.show{display:block}.good{color:#15803d;font-weight:900}.bad{color:#b91c1c;font-weight:900}
+.actions{display:flex;gap:10px;margin-top:16px}.actions button{flex:1;border:0;border-radius:12px;padding:14px;font-weight:800}.check{background:#2563eb;color:white}.next{background:#172554;color:white}.actions button:disabled{opacity:.4}
+.result{text-align:center;padding:25px 5px}.score{font-size:48px;font-weight:900;color:#2563eb;margin:12px}.secondary{border:0;background:#e2e8f0;border-radius:12px;padding:13px 16px;font-weight:800;width:100%;margin-top:10px}
+.note{font-size:12px;color:#94a3b8;line-height:1.6;margin-top:24px}
+@media(max-width:390px){main{padding:17px 13px}.hero h1{font-size:25px}.subject{padding:12px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand">📘 中1 テスト対策</div><div class="pill">第3回定期テスト</div></header>
+<main>
+<section id="home" class="screen active">
+ <div class="hero">
+  <div class="eyebrow">2026年度・中学1年生</div>
+  <h1>定期テスト対策<br>チャレンジ！</h1>
+  <p>5教科の範囲をクイズで練習しよう。単元を選んで、少しずつ点数アップ！</p>
+  <button class="primary" onclick="show('subjects')">▶ プレイ</button>
+ </div>
+ <h2>テストの教科</h2><p class="muted">国語・数学・社会・理科・英語から選べるよ。</p>
+ <div class="subjects">
+  <button class="subject" onclick="openSubject('国語')"><span class="emoji">📖</span><b>国語</b><small>文の成分・古典・漢字など</small></button>
+  <button class="subject" onclick="openSubject('数学')"><span class="emoji">➗</span><b>数学</b><small>方程式・比例と反比例</small></button>
+  <button class="subject" onclick="openSubject('社会')"><span class="emoji">🌏</span><b>社会</b><small>地理的分野</small></button>
+  <button class="subject" onclick="openSubject('理科')"><span class="emoji">🔬</span><b>理科</b><small>いろいろな生物とその共通点</small></button>
+  <button class="subject" onclick="openSubject('英語')"><span class="emoji">🔤</span><b>英語</b><small>Unit 5〜7</small></button>
+ </div>
+ <p class="note">※送ってくれたテスト範囲表をもとにした練習用サイトです。学校の教科書・ワークの問題そのものではありません。</p>
+</section>
+
+<section id="subjects" class="screen">
+ <button class="back" onclick="show('home')">← ホーム</button>
+ <h2>教科を選ぼう！</h2><p class="muted">勉強したい教科をタップしてね。</p>
+ <div class="subjects">
+  <button class="subject" onclick="openSubject('国語')"><span class="emoji">📖</span><b>国語</b><small>文の成分・漢字・古典</small></button>
+  <button class="subject" onclick="openSubject('数学')"><span class="emoji">➗</span><b>数学</b><small>方程式・比例と反比例</small></button>
+  <button class="subject" onclick="openSubject('社会')"><span class="emoji">🌏</span><b>社会</b><small>地理的分野</small></button>
+  <button class="subject" onclick="openSubject('理科')"><span class="emoji">🔬</span><b>理科</b><small>生物の共通点</small></button>
+  <button class="subject" onclick="openSubject('英語')"><span class="emoji">🔤</span><b>英語</b><small>Unit 5〜7</small></button>
+ </div>
+</section>
+
+<section id="units" class="screen">
+ <button class="back" onclick="show('subjects')">← 教科選択</button>
+ <h2 id="unitTitle">単元を選ぼう</h2><p class="muted" id="unitDesc"></p>
+ <div id="unitList" class="unitlist"></div>
+</section>
+
+<section id="play" class="screen">
+ <button class="back" onclick="show('units')">← 単元選択</button>
+ <div class="meta"><span id="qCount">第1問</span><span id="qScore">正解 0問</span></div>
+ <div class="track"><div class="fill" id="progress"></div></div>
+ <div class="panel">
+  <div class="eyebrow" id="qUnit" style="color:#64748b">単元名</div>
+  <div class="question" id="qText"></div>
+  <div class="choices" id="choices"></div>
+  <div class="feedback" id="feedback"></div>
+ </div>
+ <div class="actions"><button id="check" class="check" disabled onclick="checkAnswer()">答え合わせ</button><button id="next" class="next" disabled onclick="nextQuestion()">次へ →</button></div>
+</section>
+
+<section id="result" class="screen">
+ <button class="back" onclick="show('units')">← 単元選択</button>
+ <div class="result"><div style="font-size:45px">🏆</div><h2>チャレンジ終了！</h2><div class="score" id="finalScore">0 / 0</div><p id="resultMessage"></p></div>
+ <button class="primary" style="margin-top:8px" onclick="retry()">もう一度プレイ</button>
+ <button class="secondary" onclick="show('subjects')">別の教科を選ぶ</button>
+</section>
+</main>
+</div>
+<script>
+const bank={
+'国語':[
+ {name:'文の成分',desc:'主語・述語・修飾語など',qs:[
+ ['「弟が公園で遊ぶ。」の主語は？',['弟が','公園で','遊ぶ','公園'],0,'「誰が・何が」にあたる「弟が」が主語。'],
+ ['「花が美しく咲いた。」の述語は？',['花が','美しく','咲いた','美しく咲'],2,'「どうする・どんなだ・何だ」を表す「咲いた」が述語。'],
+ ['「赤い花」の「赤い」の成分は？',['主語','述語','修飾語','接続語'],2,'「赤い」は「花」を詳しく説明する修飾語。']]},
+ {name:'漢字の練習 2・3',desc:'読み書きの基礎',qs:[
+ ['「必要」の読み方は？',['ひつよう','ひっよう','ひつよ','ひつようう'],0,'「必要」は「ひつよう」と読む。'],
+ ['「けんきゅう」を漢字で書くと？',['建球','研究','健急','検休'],1,'研究と書くよ。'],
+ ['「努力」の意味に近いものは？',['何もしないこと','目標に向かって力を尽くすこと','休むこと','偶然うまくいくこと'],1,'努力は目標に向けて一生懸命取り組むこと。']]},
+ {name:'竹取物語・古典',desc:'昔話と古典の基礎',qs:[
+ ['「竹取物語」の冒頭に登場する人物は？',['竹を取るおじいさん','海の漁師','武士','お坊さん'],0,'竹取物語は竹を取るおじいさんが主人公の物語。'],
+ ['竹取物語は何文学の作品？',['現代文学','古典文学','海外文学','詩'],1,'平安時代の物語で、現存する最古の物語とされるよ。'],
+ ['古文を読むときに大切なことは？',['現代語と同じ意味だと決めつける','時代による言葉の違いに注意する','漢字だけ読む','声に出さない'],1,'昔と今では言葉の意味や使い方が違うことがあるよ。']]},
+ {name:'故事成語・中国の名言',desc:'言葉の由来と意味',qs:[
+ ['故事成語とは？',['昔の出来事や話に由来する言葉','新しく作った略語','季節の名前','人の名字'],0,'昔の出来事や故事に由来する決まった言い回し。'],
+ ['「矛盾」の由来となった話に出てくる道具は？',['弓と矢','盾と矛','刀と鎧','筆と紙'],1,'どんな盾も突き通せない矛と、どんなものも突き通す矛の話。'],
+ ['「矛盾」の意味は？',['話のつじつまが合わないこと','とても速いこと','仲がよいこと','静かなこと'],0,'同時には成り立たないことを言うよ。']]},
+ {name:'蜘蛛の糸',desc:'芥川龍之介の作品',qs:[
+ ['「蜘蛛の糸」の作者は？',['夏目漱石','芥川龍之介','宮沢賢治','太宰治'],1,'作者は芥川龍之介。'],
+ ['「蜘蛛の糸」に登場する地獄にいる人物は？',['カンダタ','かぐや姫','浦島太郎','一寸法師'],0,'主人公はカンダタ。'],
+ ['物語を読むときに注目するとよいものは？',['登場人物の行動や心情','文字の大きさだけ','ページ数だけ','挿絵の色だけ'],0,'行動や会話から人物の心情を読み取ろう。']]}
+],
+'数学':[
+ {name:'3章 方程式',desc:'教科書 p.91〜（範囲表 p.91〜129）',qs:[
+ ['x + 5 = 12 のとき、x は？',['5','7','12','17'],1,'両辺から5を引くと x=7。'],
+ ['3x = 18 のとき、x は？',['3','6','9','15'],1,'両辺を3で割ると x=6。'],
+ ['5 - 3x = 5 の解は？',['0','1','-1','5'],0,'両辺から5を引くと -3x=0。よって x=0。'],
+ ['-3x - 9 = 4x - 2 の解は？',['1','-1','-7/7','-1'],1,'-3x-4x=-2+9 より -7x=7。x=-1。'],
+ ['2(x+3)=14 の解は？',['2','4','5','7'],1,'かっこを外して2x+6=14。2x=8なのでx=4。']]},
+ {name:'4章 比例と反比例',desc:'比例の性質と調べ方まで',qs:[
+ ['y が x に比例するとき、式は？',['y=ax','y=a/x','y=x+a','y=x²'],0,'比例の式は y=ax。aは比例定数。'],
+ ['y=3x のとき、x=4なら y は？',['7','12','1','3'],1,'y=3×4=12。'],
+ ['比例のグラフはどんな形？',['原点を通る直線','曲線','円','折れ線'],0,'比例のグラフは原点を通る直線。'],
+ ['y=12/x のとき、x=3なら y は？',['4','9','15','36'],0,'y=12÷3=4。反比例の式は y=a/x。'],
+ ['比例定数とは y=−2x の何？',['−2','2','x','y'],0,'y=ax の a にあたる数が比例定数。']]}
+],
+'社会':[
+ {name:'地理的分野① 世界の姿',desc:'教科書 p.25〜53・ワーク p.20〜39',qs:[
+ ['地球を南北に分ける、緯度0度の線は？',['本初子午線','赤道','北回帰線','日付変更線'],1,'赤道は緯度0度。地球を北半球と南半球に分ける。'],
+ ['経度0度の線を何という？',['赤道','本初子午線','北極圏','日付変更線'],1,'経度0度はイギリスのロンドン近くを通る本初子午線。'],
+ ['地球上で最も大きい大陸は？',['アフリカ大陸','ユーラシア大陸','南アメリカ大陸','オーストラリア大陸'],1,'ユーラシア大陸が最も大きい。'],
+ ['日本がある州は？',['ヨーロッパ州','アジア州','アフリカ州','北アメリカ州'],1,'日本はアジア州の東に位置する。'],
+ ['地球を表す模型は？',['地球儀','分度器','温度計','方位磁針'],0,'地球を球体で表した模型が地球儀。']]},
+ {name:'地理的分野② 地図の見方',desc:'地図・方位・縮尺の確認',qs:[
+ ['地図で上が北のとき、右は？',['東','西','南','北'],0,'一般的な地図では上が北、右が東。'],
+ ['地図上の距離と実際の距離の比を何という？',['縮尺','標高','緯度','経度'],0,'縮尺は地図上の距離を実際の距離に対して示したもの。'],
+ ['緯度は何を基準に南北の位置を表す？',['赤道','本初子午線','北極点だけ','日付変更線'],0,'赤道を0度として南北の位置を表す。']]}
+],
+'理科':[
+ {name:'1章 いろいろな生物とその共通点',desc:'教科書 p.4〜69・生物の分類と特徴',qs:[
+ ['Aの図のような、エビに似た生物は？',['ミジンコ','アメーバ','ミドリムシ','アオミドロ'],0,'ミジンコは小さな甲殻類の仲間。'],
+ ['仮足を伸ばして移動する生物は？',['ミジンコ','アメーバ','ケイソウ','アオミドロ'],1,'アメーバは仮足を伸ばして移動する。'],
+ ['べん毛で動き、光合成もできる生物は？',['ゾウリムシ','ミドリムシ','ミジンコ','アオミドロ'],1,'ミドリムシはべん毛で動き、葉緑体を持つ。'],
+ ['ガラス質の殻を持つ小さな生物は？',['ケイソウ','アメーバ','ミジンコ','ゾウリムシ'],0,'ケイソウはガラス質の殻を持つ。'],
+ ['糸のようにつながった緑色の生物は？',['ミドリムシ','アオミドロ','ミジンコ','アメーバ'],1,'アオミドロは糸状の緑藻。'],
+ ['植物の細胞にあり、光合成を行うつくりは？',['核','葉緑体','細胞膜','液胞'],1,'葉緑体で光合成を行う。'],
+ ['動物と植物に共通して見られる基本的なつくりは？',['細胞','根','葉','羽'],0,'生物の体は細胞からできている。'],
+ ['顕微鏡で観察するとき、最初に使う対物レンズは？',['低倍率','高倍率','どれでも同じ','レンズを外す'],0,'最初は低倍率で観察する範囲を見つける。']]},
+ {name:'生物の分類・観察',desc:'共通点と分類の考え方',qs:[
+ ['背骨をもつ動物を何という？',['無脊椎動物','脊椎動物','節足動物','軟体動物'],1,'背骨をもつ動物は脊椎動物。'],
+ ['昆虫のあしは何本？',['4本','6本','8本','10本'],1,'昆虫のあしは3対、合計6本。'],
+ ['花が咲き、種子をつくる植物を何という？',['種子植物','コケ植物','シダ植物','菌類'],0,'種子でふえる植物を種子植物という。']]}
+],
+'英語':[
+ {name:'Unit 5',desc:'教科書 p.61〜（Unit 5〜7）',qs:[
+ ['「私はテニスをします。」を英語にすると？',['I play tennis.','I plays tennis.','I am play tennis.','I playing tennis.'],0,'I の後は動詞の原形 play。'],
+ ['「あなたは犬が好きですか。」は？',['Do you like dogs?','Are you like dogs?','Does you like dogs?','You do like dogs?'],0,'一般動詞の疑問文は Do you + 動詞...?'],
+ ['「私は毎日勉強します。」は？',['I study every day.','I studies every day.','I am study every day.','I studying every day.'],0,'I のとき study はそのまま。']]},
+ {name:'Unit 6',desc:'疑問文・表現の確認',qs:[
+ ['「彼はサッカーをします。」は？',['He play soccer.','He plays soccer.','He playing soccer.','He is play soccer.'],1,'三人称単数の主語 He のとき、一般動詞に s がつく。'],
+ ['「彼女は何を持っていますか。」は？',['What does she have?','What do she have?','What is she have?','What she has?'],0,'三人称単数の疑問文は Does she + 動詞の原形。'],
+ ['「これは私の本です。」は？',['This is my book.','This are my book.','That my book.','These is my book.'],0,'This is ～ で「これは～です」。']]},
+ {name:'Unit 7',desc:'教科書 p.82〜87の範囲を復習',qs:[
+ ['「彼は昨日、忙しかった。」は？',['He is busy yesterday.','He was busy yesterday.','He were busy yesterday.','He be busy yesterday.'],1,'be動詞の過去形。Heには was を使う。'],
+ ['「私は泳ぐことができます。」は？',['I can swim.','I can to swim.','I cans swim.','I am can swim.'],0,'can の後ろは動詞の原形。to は付けない。'],
+ ['「あなたは何が好きですか。」は？',['What do you like?','What are you like?','What does you like?','What you do like?'],0,'What do you like? で「何が好きですか」。']]}
+]
+};
+let currentSubject='',currentUnit=0,questions=[],qi=0,points=0,chosen=-1,locked=false;
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function openSubject(subject){currentSubject=subject;document.getElementById('unitTitle').textContent=subject+'｜単元を選ぼう';document.getElementById('unitDesc').textContent=subject==='社会'?'範囲表：地理的分野／教科書 p.25〜53・ワーク p.20〜39':subject==='数学'?'範囲表：3章「方程式」〜4章「比例と反比例」（比例の性質と調べ方まで）':subject==='理科'?'範囲表：1章「いろいろな生物とその共通点」教科書 p.4〜69':subject==='英語'?'範囲表：Unit 5〜7／教科書 p.61〜87・ワーク p.52〜83':'範囲表にある単元から選ぼう。';const list=document.getElementById('unitList');list.innerHTML='';bank[subject].forEach((u,i)=>{const b=document.createElement('button');b.className='unit';b.innerHTML='<span><b>'+u.name+'</b><small>'+u.desc+'<br>'+u.qs.length+'問</small></span><span class="arrow">›</span>';b.onclick=()=>startUnit(i);list.appendChild(b)});show('units');}
+function startUnit(i){currentUnit=i;questions=bank[currentSubject][i].qs;qi=0;points=0;renderQuestion();show('play');}
+function renderQuestion(){chosen=-1;locked=false;const q=questions[qi];document.getElementById('qCount').textContent=`第${qi+1}問 / ${questions.length}問`;document.getElementById('qScore').textContent=`正解 ${points}問`;document.getElementById('progress').style.width=(qi/questions.length*100)+'%';document.getElementById('qUnit').textContent=currentSubject+'｜'+bank[currentSubject][currentUnit].name;document.getElementById('qText').textContent=q[0];const c=document.getElementById('choices');c.innerHTML='';q[1].forEach((v,i)=>{const b=document.createElement('button');b.className='choice';b.textContent=(i+1)+'. '+v;b.onclick=()=>{if(locked)return;chosen=i;document.querySelectorAll('.choice').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');document.getElementById('check').disabled=false;};c.appendChild(b)});document.getElementById('feedback').className='feedback';document.getElementById('feedback').textContent='';document.getElementById('check').disabled=true;document.getElementById('next').disabled=true;document.getElementById('next').textContent=qi===questions.length-1?'結果を見る':'次へ →';}
+function checkAnswer(){if(chosen<0||locked)return;locked=true;const q=questions[qi],ok=chosen===q[2];if(ok)points++;document.querySelectorAll('.choice').forEach((b,i)=>{b.disabled=true;if(i===q[2])b.classList.add('sel')});const f=document.getElementById('feedback');f.innerHTML='<span class="'+(ok?'good':'bad')+'">'+(ok?'正解！ 🎉':'不正解。正解は「'+q[1][q[2]]+'」')+'</span><br>'+q[3];f.className='feedback show';document.getElementById('qScore').textContent=`正解 ${points}問`;document.getElementById('check').disabled=true;document.getElementById('next').disabled=false;}
+function nextQuestion(){if(!locked)return;if(qi<questions.length-1){qi++;renderQuestion()}else{document.getElementById('finalScore').textContent=points+' / '+questions.length;document.getElementById('resultMessage').textContent=points===questions.length?'満点！すばらしい！':points>=Math.ceil(questions.length*.6)?'いい調子！間違えた問題を復習しよう。':'解説を読み直して、もう一度挑戦しよう！';show('result')}}
+function retry(){startUnit(currentUnit)}
+</script>
+</body></html>
